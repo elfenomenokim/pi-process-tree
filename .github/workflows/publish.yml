@@ -1,0 +1,29 @@
+name: publish
+
+# Trusted publishing: npm trusts this workflow through GitHub OIDC, so a version tag (vX.Y.Z)
+# publishes to npm with provenance and no token or one-time password.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm install -g npm@latest
+      - run: npm install --no-audit --no-fund
+      - run: npm test
+      - run: npm publish --access public
