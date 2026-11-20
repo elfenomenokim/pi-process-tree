@@ -1,0 +1,25 @@
+name: Feature request
+description: A task this tool should do and does not.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you were doing when this got in the way. The options and the outcome help.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you suggest
+      description: The option, rule or receipt you expect. Small and concrete is easier to build.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you use instead
+      description: Another library, a shell wrapper, or nothing. Optional.
+    validations:
+      required: false

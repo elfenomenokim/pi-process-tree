@@ -1,0 +1,9 @@
+flowchart TD
+    A[작업자 CLI 생성] --> B[guardWorkerChild: 우선순위 낮추고 자손 추적]
+    B --> C[주기마다 ps 읽기]
+    C --> D[updateRemembered: 시작 시각이 같고 트리에 붙은 pid만 유지]
+    D --> E{hogDecision: 전체 구간 CPU 초과?}
+    E -- 예 --> F[신원 재확인, SIGTERM, 기록]
+    E -- 아니오 --> C
+    F --> G[자식 종료]
+    G --> H[stop: 신원 재확인, 생존자에 SIGTERM, 유예 후 SIGKILL]

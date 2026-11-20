@@ -1,0 +1,17 @@
+flowchart LR
+  subgraph naive["PID만 기억할 때"]
+    direction TB
+    a1["자식 프로세스<br/><b>pid 4321</b> 기억"] --> a2["자식이 끝나고<br/>OS가 4321을<br/>편집기에 다시 줌"]
+    a2 --> a3["kill 4321이<br/><b>편집기</b>를 닫음"]
+  end
+  subgraph tree["pi-process-tree"]
+    direction TB
+    b1["<b>pid 4321</b><br/>+ <b>시작 시각</b><br/>함께 기억"] --> b2{"ps를 다시 읽어<br/>시작 시각이 같은가?"}
+    b2 -- 같음 --> b3["진짜 폭주한<br/>자식에게만 신호"]
+    b2 -- "다름, 재사용됨" --> b4["건드리지 않음"]
+  end
+  naive ~~~ tree
+  classDef bad fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+  classDef good fill:#dcfce7,stroke:#16a34a,color:#14532d
+  class a3 bad
+  class b3,b4 good

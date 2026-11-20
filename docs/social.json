@@ -1,0 +1,11 @@
+{
+  "name": "pi-process-tree",
+  "sentence": "A zero-dependency TypeScript library that tracks a process tree by (pid, start time) identity and reaps runaways.",
+  "tag": "TYPESCRIPT · ZERO DEPS",
+  "terminal": [
+    "$ node docs/demo/track.mjs",
+    "parsed=3 descendantsOf([101])=202,303",
+    "live: root=99191 grandchild-reaped=1 root-alive-after-stop=true"
+  ],
+  "flow": ["ps sample", "(pid, start time) identity", "SIGTERM then SIGKILL"]
+}

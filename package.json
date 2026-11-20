@@ -1,0 +1,34 @@
+{
+  "name": "pi-process-tree",
+  "version": "0.1.0",
+  "description": "A zero-dependency TypeScript library that tracks a process tree by (pid, start time) identity and reaps runaways.",
+  "type": "module",
+  "main": "process-tree.ts",
+  "files": [
+    "process-tree.ts"
+  ],
+  "scripts": {
+    "test": "node --test tests/process-tree.test.mjs"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elfenomenokim/pi-process-tree"
+  },
+  "keywords": [
+    "process-tree",
+    "ps",
+    "pid-reuse",
+    "reaper",
+    "cpu-hog",
+    "typescript"
+  ],
+  "homepage": "https://github.com/elfenomenokim/pi-process-tree#readme",
+  "bugs": {
+    "url": "https://github.com/elfenomenokim/pi-process-tree/issues"
+  },
+  "author": "El Fenomeno"
+}

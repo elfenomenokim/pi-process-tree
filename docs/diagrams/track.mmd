@@ -1,0 +1,9 @@
+flowchart TD
+    A[spawn worker CLI] --> B[guardWorkerChild: lower priority, track descendants]
+    B --> C[sample ps every interval]
+    C --> D[updateRemembered: keep pids with same start time attached to the tree]
+    D --> E{hogDecision: over CPU limit for the whole window?}
+    E -- yes --> F[re-check identity, SIGTERM, note]
+    E -- no --> C
+    F --> G[child exits]
+    G --> H[stop: re-check identity, SIGTERM survivors, SIGKILL after grace]

@@ -1,0 +1,17 @@
+flowchart LR
+  subgraph naive["PID only"]
+    direction TB
+    a1["Remember child<br/><b>pid 4321</b>"] --> a2["Child exits;<br/>the OS reuses 4321<br/>for your editor"]
+    a2 --> a3["kill 4321<br/>closes the <b>editor</b>"]
+  end
+  subgraph tree["pi-process-tree"]
+    direction TB
+    b1["Remember<br/><b>pid 4321 + start time</b>"] --> b2{"Re-read ps:<br/>same start time?"}
+    b2 -- yes --> b3["Signal the real<br/>runaway child"]
+    b2 -- "no, reused" --> b4["Leave it alone"]
+  end
+  naive ~~~ tree
+  classDef bad fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+  classDef good fill:#dcfce7,stroke:#16a34a,color:#14532d
+  class a3 bad
+  class b3,b4 good
