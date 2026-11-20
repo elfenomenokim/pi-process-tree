@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "description": "A zero-dependency TypeScript library that tracks a process tree by (pid, start time) identity and reaps runaways.",
   "type": "module",
-  "main": "process-tree.ts",
+  "main": "process-tree.js",
   "files": [
+    "process-tree.js",
     "process-tree.ts"
   ],
   "scripts": {
-    "test": "node --test tests/process-tree.test.mjs"
+    "test": "node --test tests/process-tree.test.mjs",
+    "build": "node -e \"const m=require('node:module'),fs=require('fs');fs.writeFileSync('process-tree.js','// Generated from process-tree.ts by node:module stripTypeScriptTypes; edit the .ts file.\\n'+m.stripTypeScriptTypes(fs.readFileSync('process-tree.ts','utf8'),{mode:'strip'}))\""
   },
   "engines": {
     "node": ">=22.18.0"
@@ -30,5 +32,12 @@
   "bugs": {
     "url": "https://github.com/elfenomenokim/pi-process-tree/issues"
   },
-  "author": "El Fenomeno"
+  "author": "El Fenomeno",
+  "types": "process-tree.ts",
+  "exports": {
+    ".": {
+      "types": "./process-tree.ts",
+      "default": "./process-tree.js"
+    }
+  }
 }

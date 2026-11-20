@@ -30,9 +30,15 @@
 ## 설치
 
 ```sh
-git clone https://github.com/elfenomenokim/pi-process-tree
-cp pi-process-tree/process-tree.ts ./process-tree.ts
+npm install github:elfenomenokim/pi-process-tree
 ```
+
+```js
+import { trackDescendants } from "pi-process-tree";
+```
+
+파일 하나만 복사해도 됩니다. `git clone https://github.com/elfenomenokim/pi-process-tree`로 받은 뒤
+`process-tree.ts`(TypeScript)나 `process-tree.js`(일반 JavaScript)를 가져가세요.
 
 Node 22.18 이상이 필요합니다(타입을 네이티브로 벗깁니다). 의존성은 없습니다.
 macOS(Apple Silicon), Node 22.23.5에서 확인했습니다.

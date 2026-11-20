@@ -30,9 +30,15 @@ Zero dependencies. macOS and Linux; Windows is not supported yet.
 ## Install
 
 ```sh
-git clone https://github.com/elfenomenokim/pi-process-tree
-cp pi-process-tree/process-tree.ts ./process-tree.ts
+npm install github:elfenomenokim/pi-process-tree
 ```
+
+```js
+import { trackDescendants } from "pi-process-tree";
+```
+
+Or copy the single file: `git clone https://github.com/elfenomenokim/pi-process-tree` and take
+`process-tree.ts` (TypeScript) or `process-tree.js` (plain JavaScript).
 
 Node 22.18 or newer is required (it strips the types natively). No dependencies.
 Tested on macOS (Apple Silicon) with Node 22.23.5.
