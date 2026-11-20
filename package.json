@@ -18,7 +18,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/elfenomenokim/pi-process-tree"
+    "url": "git+https://github.com/elfenomenokim/pi-process-tree.git"
   },
   "keywords": [
     "process-tree",

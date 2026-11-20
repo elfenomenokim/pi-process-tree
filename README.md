@@ -30,7 +30,7 @@ Zero dependencies. macOS and Linux; Windows is not supported yet.
 ## Install
 
 ```sh
-npm install github:elfenomenokim/pi-process-tree
+npm install pi-process-tree
 ```
 
 ```js
