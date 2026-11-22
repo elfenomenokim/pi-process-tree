@@ -2,6 +2,34 @@
 
 Instructions for a coding agent working in this repository.
 
+## Set up for a user
+
+Goal: the user's Node project can track a child's process tree and reap runaway descendants. This is a library, so "working" means the check below runs inside their project. macOS and Linux only.
+
+1. Check what is present.
+   - `node --version` prints `v22.18` or newer. If not: `brew install node` (macOS) or `curl -fsSL https://fnm.vercel.app/install | bash` then `fnm install 22`.
+   - `ps -A -o pid=,ppid=,pcpu=,lstart= | head -1` prints a row (the library reads `ps`).
+   - Find the project folder (the one with `package.json`). If there is none, ask the user where the code lives; do not create one in their home directory.
+2. Install into that project: `npm install pi-process-tree`. It has no dependencies. Add `"type": "module"` to the project's `package.json` or use `.mjs` files for the `import`.
+3. Nothing in this setup needs the person.
+4. Prove it: save as `check.mjs` in the project and run `node check.mjs`.
+   ```js
+   import { spawn } from "node:child_process";
+   import { trackDescendants } from "pi-process-tree";
+   const root = spawn("sh", ["-c", "sleep 30 & wait"], { stdio: "ignore" });
+   const t = trackDescendants(root.pid, { intervalMs: 200 });
+   await new Promise((r) => setTimeout(r, 1000));
+   const stopped = await t.stop();
+   console.log(`reaped=${stopped.length} root-alive=${root.exitCode === null}`);
+   root.kill();
+   ```
+   Success prints `reaped=1 root-alive=true`. Delete `check.mjs` afterwards.
+5. If it fails, in this order:
+   - `ERR_MODULE_NOT_FOUND ... pi-process-tree`: run from the project folder where step 2 ran.
+   - `Cannot use import statement outside a module` or a `.ts` parse error: use `.mjs`, and import `"pi-process-tree"` (the package ships `process-tree.js`); Node below 22.18 cannot read the `.ts` file.
+   - `reaped=0`: `ps` is blocked (container without procps or a restricted sandbox); run `ps -A -o pid=,ppid=,pcpu=,lstart=` by hand and report its error.
+   - Windows: not supported.
+
 ## Layout
 
 - `process-tree.ts` — the whole library: parsing, identity, hog rule, tracking.
